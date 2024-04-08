@@ -1,0 +1,42 @@
+volumes:
+  mysql:
+
+services:
+  mysql:
+    env_file: .env
+    build: docker/mysql
+    restart: always
+    volumes:
+      - mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD_ROOT}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+
+  phpmyadmin:
+      env_file: .env
+      build: docker/phpmyadmin
+      restart: always
+      ports:
+          - ${DB_PORT}:80
+      depends_on:
+          - mysql
+      environment:
+          - PMA_ARBITRARY=1
+          - PMA_HOST=${DB_HOST}
+          - PMA_USER=${DB_USERNAME}
+          - PMA_PASSWORD=${DB_PASSWORD}
+
+  nodejs:
+      env_file: .env
+      build: docker/node
+      command: sh -c "yarn && yarn dev"
+      depends_on:
+        - mysql
+      ports:
+          - "80:80"
+      volumes:
+          - .:/project
+      environment:
+          NODE_ENV: development

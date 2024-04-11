@@ -48,9 +48,9 @@ export class UserService {
     return await this.userRepository.getUsers();
   }
 
-  async update(id: string, userUpdateDto: UserUpdateDto) {
+  async update(login: string, userUpdateDto: UserUpdateDto) {
 
-    const existingUser = await this.userRepository.getUser(id);
+    const existingUser = await this.userRepository.getUser(login);
 
     if (!existingUser) {
       throw new ConflictException('User not found');

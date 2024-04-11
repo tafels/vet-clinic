@@ -41,9 +41,9 @@ export class UserController {
   @UseGuards(AuthGuard('api-key'))
   @ApiOperation({ summary: 'Update info user' })
   @ApiResponse({ status: 200, type: User })
-  @Put(':id')
-  async update(@Query('id', new ParseIntPipe()) id: string, @Body() userUpdateDto: UserUpdateDto) {
-    return await this.userService.update(id, userUpdateDto);
+  @Put(':login')
+  async update(@Param('login') login: string, @Body() userUpdateDto: UserUpdateDto) {
+    return await this.userService.update(login, userUpdateDto);
   }
 
   @UseGuards(AuthGuard('api-key'))

@@ -58,8 +58,8 @@ export class UserRepository implements UserRepositoryInterface {
     return await this.userRepository.find({select: select});
   }
 
-  update(userUpdateDto: UserUpdateDto): Promise<any> {
-    return Promise.resolve(undefined);
+  async update(userUpdateDto: UserUpdateDto): Promise<any> {
+    return await this.userRepository.save(userUpdateDto);
   }
 
   async delete(id: number): Promise<any> {

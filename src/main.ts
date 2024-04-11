@@ -10,7 +10,15 @@ async function bootstrap() {
     .setDescription('The private veterinary clinic API description')
     .setVersion('0.0.1')
     .addTag('clinic')
+    .addApiKey({
+      type: "apiKey",
+      name: "X-API-KEY",
+      in: "header",
+      description: "Enter your API key"
+    }, "X-API-KEY")
     .build();
+
+
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 

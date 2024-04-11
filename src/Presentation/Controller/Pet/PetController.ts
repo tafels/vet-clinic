@@ -1,15 +1,18 @@
-import { Controller, Get, Query, Post, Body, Put, Param, Delete, UsePipes, ValidationPipe } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Controller, Get, Post, Body, Put, Param, Delete, UsePipes, ValidationPipe, UseGuards } from '@nestjs/common';
+import { ApiOperation, ApiResponse, ApiSecurity, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 import { Pet } from '../../../Domain/Entity/Pet/PetEntity';
 import { PetService } from '../../Service/Pet/PetService';
 import { PetCreateDto } from '../../../Application/Dto/Pet/PetCreateDto';
 import { PetUpdateDto } from '../../../Application/Dto/Pet/PetUpdateDto';
 
 @ApiTags('Pets')
+@ApiSecurity("X-API-KEY", ["X-API-KEY"])
 @Controller('pet')
 export class PetController {
   constructor(private readonly petService: PetService) {}
 
+  @UseGuards(AuthGuard('api-key'))
   @ApiOperation({ summary: 'Add pets by person Id' })
   @ApiResponse({ status: 200, type: Pet })
   @Post('/person/:id')
@@ -18,6 +21,7 @@ export class PetController {
     return this.petService.create(id, PetCreateDto);
   }
 
+  @UseGuards(AuthGuard('api-key'))
   @ApiOperation({ summary: 'Get all pets by person' })
   @ApiResponse({ status: 200, type: [Pet] })
   @Get()
@@ -25,6 +29,7 @@ export class PetController {
     return this.petService.findAll();
   }
 
+  @UseGuards(AuthGuard('api-key'))
   @ApiOperation({ summary: 'Get pets by person' })
   @ApiResponse({ status: 200, type: Pet })
   @Get(':id')
@@ -32,6 +37,7 @@ export class PetController {
     return this.petService.findOne(id);
   }
 
+  @UseGuards(AuthGuard('api-key'))
   @ApiOperation({ summary: 'Update info pets' })
   @ApiResponse({ status: 200, type: Pet })
   @Put(':id')
@@ -40,8 +46,9 @@ export class PetController {
     return this.petService.update(id, updatePetsDto);
   }
 
+  @UseGuards(AuthGuard('api-key'))
   @ApiOperation({ summary: 'Remove pets' })
-  @ApiResponse({ status: 200, type: Pet })
+  @ApiResponse({ status: 200, description: 'Remove зуе successful' })
   @Delete(':id')
   remove(@Param('id') id: number) {
     return this.petService.remove(id);

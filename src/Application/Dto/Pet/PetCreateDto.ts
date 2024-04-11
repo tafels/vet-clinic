@@ -6,7 +6,7 @@ export class PetCreateDto {
   @ApiProperty({ example: 'Smurfik', description: 'pets name' })
   @IsString()
   readonly name: string;
-  @ApiProperty({ example: 'cat', description: 'pets type' })
+  @ApiProperty({ enum: ['Cat', 'Dog'], description: 'pets type'})
   @IsString()
   readonly type: string;
   @ApiProperty({ example: '2', description: 'pets year' })

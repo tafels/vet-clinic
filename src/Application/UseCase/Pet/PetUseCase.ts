@@ -15,8 +15,6 @@ export class PetUseCase {
     petObject.type = PetCreateDto.type;
     petObject.year = PetCreateDto.year;
 
-    console.log(petObject);
-
     return await this.petRepository.create(petObject);
   }
 }

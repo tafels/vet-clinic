@@ -1,9 +1,9 @@
-import { PetCreateDto } from '../../../Application/Dto/Pet/PetCreateDto';
+import { Pet } from '../../Entity/Pet/PetEntity'
 import { PetUpdateDto } from '../../../Application/Dto/Pet/PetUpdateDto';
 
 export interface PetRepositoryInterface {
 
-  create(PetCreateDto: PetCreateDto): Promise<any>;
+  create(petObject:Pet): Promise<any>;
 
   getPet(id: number): Promise<any>;
 

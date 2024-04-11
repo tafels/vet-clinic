@@ -4,7 +4,6 @@ import { UserRepositoryInterface } from '../../../Domain/Repository/User/UserRep
 import { DataSource, Repository } from 'typeorm';
 import { User } from '../../../Domain/Entity/User/UserEntity';
 import { UserCreateDto} from '../../../Application/Dto/User/UserCreateDto';
-import { UserAuthDto } from '../../../Application/Dto/User/UserAuthDto';
 import { UserUpdateDto } from '../../../Application/Dto/User/UserUpdateDto';
 
 @Injectable()
@@ -30,8 +29,8 @@ export class UserRepository implements UserRepositoryInterface {
     });
   }
 
-  async create(userCreateDto: UserCreateDto): Promise<any> {
-    return await this.userRepository.save(userCreateDto);
+  async create(userObject): Promise<any> {
+    return await this.userRepository.save(userObject);
   }
 
   async getUser(login: string): Promise<any> {
@@ -58,8 +57,8 @@ export class UserRepository implements UserRepositoryInterface {
     return await this.userRepository.find({select: select});
   }
 
-  async update(userUpdateDto: UserUpdateDto): Promise<any> {
-    return await this.userRepository.save(userUpdateDto);
+  async update(userObject): Promise<any> {
+    return await this.userRepository.save(userObject);
   }
 
   async delete(id: number): Promise<any> {

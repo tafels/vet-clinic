@@ -15,6 +15,6 @@ export class UserUseCase {
     userObject.password = userCreateDto.password;
 
 
-    return await this.userRepository.create(userCreateDto);
+    return await this.userRepository.create(userObject);
   }
 }

@@ -74,8 +74,8 @@ export class PersonRepository implements PersonRepositoryInterface {
     return await this.personRepository.find({ where: { isActive: isActive } });
   }
 
-  async update(PersonUpdateDto: PersonUpdateDto): Promise<any> {
-    return await this.personRepository.save(PersonUpdateDto);
+  async update(personObject:Person): Promise<any> {
+    return await this.personRepository.save(personObject);
   }
 
   async delete(id: number): Promise<any> {

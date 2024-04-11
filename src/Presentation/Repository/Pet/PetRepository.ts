@@ -9,8 +9,8 @@ import { Repository } from 'typeorm';
 export class PetRepository implements PetRepositoryInterface {
   constructor(@InjectRepository(Pet) private petRepository: Repository<Pet>) {}
 
-  async create(PetCreateDto): Promise<any> {
-    return await this.petRepository.save(PetCreateDto);
+  async create(petObject): Promise<any> {
+    return await this.petRepository.save(petObject);
   }
 
   async getPersonByPetId(id: number): Promise<any> {

@@ -1,5 +1,6 @@
 import { PersonCreateDto } from '../../../Application/Dto/Person/PersonCreateDto';
 import { PersonUpdateDto } from '../../../Application/Dto/Person/PersonUpdateDto';
+import { Person } from '../../Entity/Person/PersonEntity';
 
 export interface PersonRepositoryInterface {
   create(PersonCreateDto: PersonCreateDto): Promise<any>;
@@ -8,7 +9,7 @@ export interface PersonRepositoryInterface {
 
   getPersons(): Promise<any>;
 
-  update(PersonUpdateDto: PersonUpdateDto): Promise<any>;
+  update(personObject:Person): Promise<any>;
 
   delete(id: number): Promise<any>;
 }

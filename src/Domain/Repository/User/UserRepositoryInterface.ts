@@ -1,17 +1,15 @@
-import { UserAuthDto } from '../../../Application/Dto/User/UserAuthDto';
-import { UserUpdateDto } from '../../../Application/Dto/User/UserUpdateDto';
-import { UserCreateDto } from '../../../Application/Dto/User/UserCreateDto';
+import { User } from '../../Entity/User/UserEntity';
 
 export interface UserRepositoryInterface {
-  createDefault(userData): Promise<any>;
+  createDefault(userData:User[]): Promise<any>;
 
-  create(userCreateDto: UserCreateDto): Promise<any>;
+  create(userObject:User): Promise<any>;
 
   getUser(login: string): Promise<any>;
 
   getUsers(): Promise<any>;
 
-  update(userUpdateDto: UserUpdateDto): Promise<any>;
+  update(userObject:User): Promise<any>;
 
   delete(id: number): Promise<any>;
 

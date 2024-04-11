@@ -1,9 +1,8 @@
-import { ApiOperation, ApiResponse, ApiSecurity, ApiTags } from '@nestjs/swagger';
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Query, UseGuards } from '@nestjs/common';
+import { ApiCreatedResponse, ApiOperation, ApiResponse, ApiSecurity, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from '../../../Domain/Entity/User/UserEntity';
 import { UserService } from '../../Service/User/UserService';
-import { AuthService } from '../../Service/Auth/AuthService';
 import { UserCreateDto } from '../../../Application/Dto/User/UserCreateDto';
 import { UserUpdateDto } from '../../../Application/Dto/User/UserUpdateDto';
 
@@ -11,12 +10,11 @@ import { UserUpdateDto } from '../../../Application/Dto/User/UserUpdateDto';
 @ApiSecurity("X-API-KEY", ["X-API-KEY"])
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService, private readonly authService: AuthService) {}
-
+  constructor(private readonly userService: UserService) {}
 
   @UseGuards(AuthGuard('api-key'))
   @ApiOperation({ summary: 'Create new user' })
-  @ApiResponse({ status: 200, type: User })
+  @ApiCreatedResponse({ description: 'User record has been successfully created.', type: User})
   @Post()
   create(@Body() userCreateDto: UserCreateDto) {
     return this.userService.create(userCreateDto);

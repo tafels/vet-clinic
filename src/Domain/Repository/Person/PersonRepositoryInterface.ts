@@ -1,9 +1,7 @@
-import { PersonCreateDto } from '../../../Application/Dto/Person/PersonCreateDto';
-import { PersonUpdateDto } from '../../../Application/Dto/Person/PersonUpdateDto';
 import { Person } from '../../Entity/Person/PersonEntity';
 
 export interface PersonRepositoryInterface {
-  create(PersonCreateDto: PersonCreateDto): Promise<any>;
+  create(personObject:Person): Promise<any>;
 
   getPerson(id: number): Promise<any>;
 

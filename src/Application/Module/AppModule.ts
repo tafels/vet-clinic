@@ -25,7 +25,7 @@ import { JwtModule } from '@nestjs/jwt';
     }),
     JwtModule.register({
       global: true,
-      secret: '403926033d001b5279df37287b7c7c267fa',
+      secret: process.env.apiKey,
       signOptions: { expiresIn: '60s' },
     }),
     TypeOrmModule.forRoot({

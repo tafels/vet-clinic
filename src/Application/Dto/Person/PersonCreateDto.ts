@@ -16,5 +16,5 @@ export class PersonCreateDto {
   readonly phone: string;
   @ApiProperty({ example: 'petrov_vadim@mail.com', description: 'email person' })
   email: string;
-  pets: [Pet];
+  // pets: [Pet];
 }

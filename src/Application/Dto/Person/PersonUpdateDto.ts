@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsBooleanString, IsString, Matches } from 'class-validator';
+import { IsBoolean, IsString, Matches } from 'class-validator';
 
 export class PersonUpdateDto {
   @ApiProperty({ example: 'Vadim', description: 'firstName person' })
@@ -15,6 +15,7 @@ export class PersonUpdateDto {
   phone: string;
   @ApiProperty({ example: 'petrov_vadim@mail.com', description: 'email person' })
   email: string;
-  @IsBooleanString()
+  @ApiProperty({ example: 'true', description: 'Active person' })
+  @IsBoolean()
   isActive: boolean;
 }

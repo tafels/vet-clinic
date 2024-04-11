@@ -22,7 +22,7 @@ export class PersonController {
   }
 
   @UseGuards(AuthGuard('api-key'))
-  @ApiOperation({ summary: 'Get all person' })
+  @ApiOperation({ summary: 'Get all person has is active' })
   @ApiResponse({ status: 200, type: [Person] })
   @Get()
   async findAll() {
@@ -42,8 +42,8 @@ export class PersonController {
   @ApiResponse({ status: 200, type: Person })
   @Put(':id')
   @UsePipes(new ValidationPipe())
-  update(@Param('id') id: number, @Body() personDto: PersonUpdateDto) {
-    return this.personService.update(id, personDto);
+  update(@Param('id') id: number, @Body() personUpdateDto: PersonUpdateDto) {
+    return this.personService.update(id, personUpdateDto);
   }
 
   @UseGuards(AuthGuard('api-key'))

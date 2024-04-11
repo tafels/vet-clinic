@@ -1,5 +1,4 @@
 import { Pet } from '../../Entity/Pet/PetEntity'
-import { PetUpdateDto } from '../../../Application/Dto/Pet/PetUpdateDto';
 
 export interface PetRepositoryInterface {
 
@@ -9,7 +8,7 @@ export interface PetRepositoryInterface {
 
   getPersonByPetId(id: number): Promise<any>;
 
-  update(PersonUpdateDto: PetUpdateDto): Promise<any>;
+  update(petObject:Pet): Promise<any>;
 
   delete(id: number): Promise<any>;
 }

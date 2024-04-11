@@ -14,7 +14,7 @@ async function bootstrap() {
       type: "apiKey",
       name: "X-API-KEY",
       in: "header",
-      description: "Enter your API key"
+      description: "Enter the token you received during authorization"
     }, "X-API-KEY")
     .build();
 

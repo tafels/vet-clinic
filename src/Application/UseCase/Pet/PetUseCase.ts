@@ -17,4 +17,8 @@ export class PetUseCase {
 
     return await this.petRepository.create(petObject);
   }
+
+  async update(petObject) {
+    return await this.petRepository.update(petObject);
+  }
 }

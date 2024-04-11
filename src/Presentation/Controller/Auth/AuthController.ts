@@ -8,7 +8,7 @@ import { UserAuthDto } from '../../../Application/Dto/User/UserAuthDto';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @ApiOperation({ summary: 'Order token' })
+  @ApiOperation({ summary: 'Log in and get a token' })
   @ApiResponse({ status: 200, description: 'get you token' })
   @Post()
   create(@Body() userAuthDto: UserAuthDto) {

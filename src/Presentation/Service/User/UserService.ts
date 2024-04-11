@@ -23,9 +23,15 @@ export class UserService {
 
   async createDefaultNewUser() {
 
-    await this.userRepository.createDefault(this.users)
+    for (const row of this.users) {
 
-    return 'User is already';
+      const existingUser = await this.userRepository.getUser(row.login)
+
+      if(!existingUser) {
+        await this.userUseCase.create(row);
+      }
+
+    }
 
   }
 
@@ -58,7 +64,7 @@ export class UserService {
 
     Object.assign(existingUser, userUpdateDto);
 
-    return await this.userRepository.update(existingUser);
+    return await this.userUseCase.update(existingUser);
 
   }
 

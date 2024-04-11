@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { Pet } from '../../../Domain/Entity/Pet/PetEntity';
 import { PetRepositoryInterface } from '../../../Domain/Repository/Pet/PetRepositoryInterface';
-import { PetUpdateDto } from '../../../Application/Dto/Pet/PetUpdateDto';
-import { Repository } from 'typeorm';
+
 
 @Injectable()
 export class PetRepository implements PetRepositoryInterface {
@@ -26,8 +26,8 @@ export class PetRepository implements PetRepositoryInterface {
     return await this.petRepository.find();
   }
 
-  async update(PersonUpdateDto: PetUpdateDto): Promise<any> {
-    return await this.petRepository.save(PersonUpdateDto);
+  async update(petObject): Promise<any> {
+    return await this.petRepository.save(petObject);
   }
 
   async delete(id: number): Promise<any> {

@@ -4,13 +4,12 @@ import { PersonRepository } from '../../Repository/Person/PersonRepository';
 import { PetRepository } from '../../Repository/Pet/PetRepository';
 import { PersonCreateDto } from '../../../Application/Dto/Person/PersonCreateDto';
 import { PersonUpdateDto } from '../../../Application/Dto/Person/PersonUpdateDto';
+import { PersonUseCase } from '../../../Application/UseCase/Person/PersonUseCase';
 
 @Injectable()
 export class PersonService {
 
-  private readonly persons: Person[] = [];
-
-  constructor(private personRepository: PersonRepository, private petRepository: PetRepository) {}
+  constructor(private personRepository: PersonRepository, private petRepository: PetRepository, private personUseCase: PersonUseCase) {}
 
   async create(PersonCreateDto: PersonCreateDto) {
 
@@ -20,11 +19,11 @@ export class PersonService {
       throw new ConflictException('Person with this phone already exists');
     }
 
-    return await this.personRepository.create(PersonCreateDto);
+    return await this.personUseCase.create(PersonCreateDto);
 
   }
 
-  async update(id: number, PersonUpdateDto: PersonUpdateDto) {
+  async update(id: number, personUpdateDto: PersonUpdateDto) {
 
     const existingPerson = await this.personRepository.getPerson(id);
 
@@ -32,7 +31,7 @@ export class PersonService {
       throw new ConflictException('Person not found');
     }
 
-    Object.assign(existingPerson, PersonUpdateDto);
+    Object.assign(existingPerson, personUpdateDto);
 
     return await this.personRepository.update(existingPerson);
 

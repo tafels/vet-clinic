@@ -11,7 +11,7 @@ export class PetService {
 
   constructor(private petRepository: PetRepository, private personRepository: PersonRepository, private petUseCase: PetUseCase) {}
 
-  async create(personId, PetCreateDto: PetCreateDto) {
+  async create(personId, petCreateDto: PetCreateDto) {
 
     const existingPerson = await this.personRepository.getPerson(personId);
 
@@ -19,11 +19,11 @@ export class PetService {
       throw new ConflictException('Person not found');
     }
 
-    return await this.petUseCase.create(personId, PetCreateDto);
+    return await this.petUseCase.create(personId, petCreateDto);
 
   }
 
-  async update(id: number, PetUpdateDto: PetUpdateDto) {
+  async update(id: number, petUpdateDto: PetUpdateDto) {
 
     const existingPet = await this.petRepository.getPet(id);
 
@@ -31,9 +31,9 @@ export class PetService {
       throw new ConflictException('Pet not found');
     }
 
-    Object.assign(existingPet, PetUpdateDto);
+    Object.assign(existingPet, petUpdateDto);
 
-    return await this.petRepository.update(existingPet);
+    return await this.petUseCase.update(existingPet);
 
   }
 
